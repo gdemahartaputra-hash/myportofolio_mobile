@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// Halaman utama MyPortfolio Mobile.
+///
+/// Menampilkan identitas pemilik melalui tiga [InfoCard] dan menu aksi
+/// berupa kisi [ItemCard]. Halaman bersifat statis sehingga cukup
+/// menggunakan [StatelessWidget].
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
@@ -81,6 +86,10 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+/// Kartu kecil yang menampilkan [title] dan [content].
+///
+/// Dipakai tiga kali (NPM, Name, Class) agar tampilan kartu cukup
+/// didefinisikan satu kali (reusable widget).
 class InfoCard extends StatelessWidget {
   // Kartu informasi yang menampilkan judul (title) dan isi (content).
   final String title;
@@ -110,6 +119,10 @@ class InfoCard extends StatelessWidget {
   }
 }
 
+/// Model data satu tombol aksi: [name], [icon], dan [color].
+///
+/// Warna disimpan di model sehingga [ItemCard] tidak memerlukan
+/// percabangan `if-else` untuk menentukan warna tiap tombol.
 class ItemHomepage {
   final String name;
   final IconData icon;
@@ -118,6 +131,9 @@ class ItemHomepage {
   ItemHomepage(this.name, this.icon, this.color);
 }
 
+/// Kartu tombol aksi berikon dengan warna latar dari [ItemHomepage.color].
+///
+/// Saat ditekan, menampilkan SnackBar berisi nama tombol.
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
 
@@ -126,7 +142,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan warna sekunder dari skema tema aplikasi.
+      // Warna latar unik per tombol, diambil dari model ItemHomepage.
       color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
@@ -138,6 +154,8 @@ class ItemCard extends StatelessWidget {
             ..showSnackBar(
               SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!"),
+                backgroundColor: item.color,
+                behavior: SnackBarBehavior.floating,
               ),
             );
         },
