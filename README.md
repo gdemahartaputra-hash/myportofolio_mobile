@@ -87,7 +87,7 @@ Claude Opus 5.5 digunakan untuk beberapa keperluan berikut:
 
 - **Penjelasan Kode:** Meminta penjelasan secara bertahap mengenai setiap bagian kode, termasuk fungsi widget, atribut, parameter, konstruktor, serta hubungan parent-child dalam struktur widget tree.
 - **Membimbing dalam Implementasi:** Memahami cara mengimplementasikan persyaratan Tugas 7, seperti pemisahan kode ke dalam `main.dart` dan `menu.dart`, penggunaan `StatelessWidget`, pembuatan `InfoCard` dan `ItemCard`, serta penerapan warna berbeda pada setiap tombol.
-- **Pehamahman Konsep Dasar:** Memperdalam pemahaman mengenai konsep Flutter, khususnya `MaterialApp`, `BuildContext`, `StatelessWidget`, `StatefulWidget`, hot reload, dan hot restart.
+- **Pemahaman Konsep Dasar:** Memperdalam pemahaman mengenai konsep Flutter, khususnya `MaterialApp`, `BuildContext`, `StatelessWidget`, `StatefulWidget`, hot reload, dan hot restart.
 
 ### 2. Log Prompt dan Interaksi AI
 
@@ -104,15 +104,21 @@ Berikut merupakan ringkasan jenis prompt yang digunakan selama proses pengerjaan
 
 ### 3. Evaluasi Keterbatasan AI
 
-Dalam proses pengerjaan, saya menyadari bahwa AI tidak selalu dapat memberikan solusi yang langsung sesuai dengan kondisi proyek.
+Selama pengerjaan, saya menemukan bahwa AI tidak selalu benar dan tidak selalu sesuai dengan batasan tugas. Berikut kesalahan dan keterbatasan nyata yang saya temui, beserta cara saya menanganinya:
 
-Salah satu contoh nyata terjadi ketika saya mengubah `MyHomePage` dari struktur kelas yang menggunakan konstruktor `const` menjadi implementasi non-`const` sesuai kebutuhan proyek. Pada saat itu, hot reload mengalami kegagalan dengan pesan:
+- **Verifikasi yang tidak lengkap.** Saat saya meminta pemeriksaan hasil Tutorial 08, AI menyatakan pekerjaan "sudah benar dan siap dikumpulkan" hanya berdasarkan `flutter analyze`. AI tidak memeriksa `test/widget_test.dart` bawaan `flutter create`, yang ternyata gagal karena masih menguji counter yang sudah dihapus. Hal ini baru ketahuan pada pemeriksaan berikutnya. Dari sini saya belajar bahwa "tidak ada error" pada analisis statis belum tentu berarti seluruh proyek sudah diperiksa.
 
-`Const class cannot become non-const ... Hot reload rejected`
+- **Penilaian yang melebihi isi rubrik.** Setelah menemukan test yang gagal, AI justru menganggapnya sebagai hal yang "harus diperbaiki" dan menurunkan perkiraan nilai kualitas kode. Padahal, `flutter test` tidak diminta di Tutorial 08 maupun Tugas 7. Saya mengoreksi hal ini, dan AI mengakui bahwa itu adalah asumsinya sendiri, bukan isi rubrik. Sejak itu, setiap saran AI saya cocokkan langsung dengan teks rubrik dan checklist pada dokumen tugas.
 
-Pengalaman tersebut menunjukkan bahwa meskipun AI dapat menjelaskan perubahan kode, AI tidak dapat menggantikan pemahaman mengenai kondisi aplikasi yang sedang berjalan. Saya perlu memahami bahwa perubahan tertentu membutuhkan hot restart, bukan sekadar hot reload.
+- **Saran yang terlalu jauh dari tutorial.** Ketika saya meminta saran untuk mencapai nilai maksimal, AI mengusulkan memecah `menu.dart` ke folder `models/` dan `widgets/`, mengganti body dengan `SingleChildScrollView`, dan menambahkan `IntrinsicHeight`. Perubahan tersebut mengubah struktur yang diajarkan di Tutorial 08. Saya menolaknya dan memilih perubahan minimal (docstring dan SnackBar berwarna), karena rubrik nilai 4 menggunakan kata "atau" sehingga cukup dipenuhi salah satu kriterianya.
 
-Selain itu, penjelasan AI terkadang terlalu berfokus pada konsep umum tanpa langsung mempertimbangkan struktur proyek yang sedang dikerjakan. Oleh karena itu, setiap penjelasan perlu dicocokkan kembali dengan kode aktual dan instruksi tugas agar implementasinya tidak menyimpang.
+- **Instruksi yang tidak konsisten.** Setelah rencana diubah menjadi perubahan minimal tanpa banyak branch, AI masih menyarankan perintah `git push origin main` beserta nama-nama branch yang tidak pernah saya buat. Perintah tersebut akan gagal jika dijalankan apa adanya. Saya menanyakan alasannya dan akhirnya cukup menggunakan `git push origin main`.
+
+- **AI tidak melihat kondisi aplikasi yang sedang berjalan.** Saat mengubah `MyHomePage` dari konstruktor `const` menjadi non-`const`, hot reload gagal dengan pesan `Const class cannot become non-const ... Hot reload rejected`. AI baru bisa menjelaskan penyebabnya setelah saya mengirimkan tangkapan layar terminal. Ini menunjukkan bahwa AI bergantung pada informasi yang saya berikan, sehingga saya tetap harus mengamati sendiri perilaku aplikasi.
+
+- **Keterbatasan lingkungan kerja.** AI tidak dapat memastikan repositori GitHub bersifat publik karena GitHub CLI (`gh`) tidak terpasang di komputer saya, sehingga saya memeriksanya secara manual melalui jendela incognito.
+
+Secara keseluruhan, AI paling berguna untuk menjelaskan konsep dan memberi arah. Namun, keputusan tentang apa yang benar-benar diminta tugas, seberapa jauh perubahan boleh dilakukan, dan apakah aplikasi sudah berjalan dengan benar tetap harus saya verifikasi sendiri.
 
 ### 4. Verifikasi dan Perbaikan Mandiri
 
