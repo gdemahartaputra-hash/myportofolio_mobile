@@ -79,26 +79,63 @@ Aplikasi mobile Flutter untuk portofolio pribadi saya. Aplikasi ini adalah klien
 
 ## AI Disclosure
 
-Dalam pengerjaan Individual Assignment 7, saya menggunakan **Claude Opus 5.5** sebagai AI assistant untuk membantu memahami struktur dan implementasi kode Flutter. Penggunaan AI difokuskan sebagai sarana pembelajaran, bukan sebagai pengganti proses pemahaman dan pengerjaan mandiri.
+Dalam pengerjaan Individual Assignment 7, saya menggunakan **Claude Opus 5.5** sebagai AI assistant untuk membantu memahami struktur, fungsi, dan implementasi kode Flutter. Penggunaan AI difokuskan sebagai sarana pembelajaran agar saya dapat mengimplementasikan setiap instruksi tugas secara mandiri berdasarkan pemahaman terhadap kode yang digunakan.
 
-Secara spesifik, Claude Opus 5.5 saya gunakan untuk:
+### 1. Penggunaan AI
 
-1. **Penjelasan Kode:** Meminta penjelasan mengenai setiap bagian kode, termasuk fungsi widget, atribut, parameter, serta hubungan antar-widget dalam struktur *widget tree*. Hal ini membantu saya memahami cara kerja kode sebelum mengimplementasikannya.
-2. **Membimbing dalam Proses Implementasi:** Memahami cara menerapkan instruksi Tugas 7, seperti pemisahan kode ke dalam `main.dart` dan `menu.dart`, penggunaan `StatelessWidget`, pembuatan `InfoCard` dan `ItemCard`, serta penerapan warna dan `SnackBar` pada tombol aksi.
-3. **Memahami Konsep Dasar:** Memperdalam pemahaman mengenai konsep dasar Flutter, terutama `MaterialApp`, `BuildContext`, perbedaan `StatelessWidget` dan `StatefulWidget`, serta mekanisme *hot reload* dan *hot restart*.
+Claude Opus 5.5 digunakan untuk beberapa keperluan berikut:
 
-### Evaluasi dan Keterbatasan AI
+- **Penjelasan Kode:** Meminta penjelasan secara bertahap mengenai setiap bagian kode, termasuk fungsi widget, atribut, parameter, konstruktor, serta hubungan parent-child dalam struktur widget tree.
+- **Membimbing dalam Implementasi:** Memahami cara mengimplementasikan persyaratan Tugas 7, seperti pemisahan kode ke dalam `main.dart` dan `menu.dart`, penggunaan `StatelessWidget`, pembuatan `InfoCard` dan `ItemCard`, serta penerapan warna berbeda pada setiap tombol.
+- **Pehamahman Konsep Dasar:** Memperdalam pemahaman mengenai konsep Flutter, khususnya `MaterialApp`, `BuildContext`, `StatelessWidget`, `StatefulWidget`, hot reload, dan hot restart.
 
-Saya menyadari bahwa penjelasan dan saran yang diberikan AI tidak selalu dapat langsung diterapkan tanpa pemeriksaan lebih lanjut. AI dapat memberikan penjelasan yang kurang sesuai dengan konteks proyek, mengasumsikan struktur kode tertentu, atau menghasilkan solusi yang secara sintaksis benar tetapi belum tentu sesuai dengan kebutuhan tugas. Oleh karena itu, saya tidak menjadikan jawaban AI sebagai acuan mutlak.
+### 2. Log Prompt dan Interaksi AI
 
-### Verifikasi dan Perbaikan Mandiri
+Berikut merupakan ringkasan jenis prompt yang digunakan selama proses pengerjaan:
 
-Untuk memastikan hasil implementasi sesuai dengan instruksi tugas, saya melakukan beberapa langkah secara mandiri:
+| No. | Fokus | Tujuan Prompt |
+|---|---|---|
+| 1 | Code Structure | Meminta Claude menjelaskan fungsi setiap bagian kode pada `main.dart` dan `menu.dart`, termasuk hubungan antar-widget. |
+| 2 | Widget Implementation | Meminta penjelasan mengenai implementasi `InfoCard`, `ItemCard`, dan `ItemHomepage`, serta bagaimana ketiganya saling berhubungan. |
+| 3 | StatelessWidget | Memahami alasan penggunaan `StatelessWidget` pada `MyHomePage` dan perbedaannya dengan `StatefulWidget`. |
+| 4 | Customization | Memahami cara memberikan warna berbeda pada setiap `ItemCard` menggunakan atribut `Color color` pada model `ItemHomepage`. |
+| 5 | Interaction | Memahami penggunaan `InkWell`, `ScaffoldMessenger`, dan `SnackBar` untuk memberikan respons ketika tombol ditekan. |
+| 6 | Debugging | Meminta penjelasan mengenai perbedaan hot reload dan hot restart serta penyebab perubahan struktur kelas tidak dapat diterapkan melalui hot reload. |
 
-- Mempelajari kembali penjelasan AI dan mencocokkannya dengan materi Tutorial 08 serta ketentuan Individual Assignment 7.
-- Memahami fungsi setiap bagian kode sebelum menerapkannya ke dalam proyek, sehingga saya dapat mengetahui peran masing-masing widget dan atribut yang digunakan.
-- Memeriksa kembali struktur kode dan memastikan pemisahan komponen antara `main.dart` dan `menu.dart` berjalan sesuai ketentuan.
-- Menyesuaikan implementasi dengan kebutuhan portofolio pribadi, termasuk informasi identitas, nama tombol aksi, ikon, dan pemilihan warna masing-masing kartu.
-- Melakukan pemeriksaan dan pengujian terhadap aplikasi untuk memastikan setiap tombol menampilkan pesan `SnackBar` yang sesuai dengan nama tombolnya.
+### 3. Evaluasi Keterbatasan AI
 
-Dengan demikian, Claude Opus 5.5 berperan sebagai pendamping pembelajaran yang membantu saya memahami kode dan proses implementasi. Keputusan akhir mengenai penerapan kode, penyesuaian kebutuhan proyek, serta evaluasi hasil tetap menjadi tanggung jawab saya sendiri.
+Dalam proses pengerjaan, saya menyadari bahwa AI tidak selalu dapat memberikan solusi yang langsung sesuai dengan kondisi proyek.
+
+Salah satu contoh nyata terjadi ketika saya mengubah `MyHomePage` dari struktur kelas yang menggunakan konstruktor `const` menjadi implementasi non-`const` sesuai kebutuhan proyek. Pada saat itu, hot reload mengalami kegagalan dengan pesan:
+
+`Const class cannot become non-const ... Hot reload rejected`
+
+Pengalaman tersebut menunjukkan bahwa meskipun AI dapat menjelaskan perubahan kode, AI tidak dapat menggantikan pemahaman mengenai kondisi aplikasi yang sedang berjalan. Saya perlu memahami bahwa perubahan tertentu membutuhkan hot restart, bukan sekadar hot reload.
+
+Selain itu, penjelasan AI terkadang terlalu berfokus pada konsep umum tanpa langsung mempertimbangkan struktur proyek yang sedang dikerjakan. Oleh karena itu, setiap penjelasan perlu dicocokkan kembali dengan kode aktual dan instruksi tugas agar implementasinya tidak menyimpang.
+
+### 4. Verifikasi dan Perbaikan Mandiri
+
+Untuk memastikan hasil pengerjaan sesuai dengan kebutuhan tugas, saya melakukan penyesuaian dan pemeriksaan terhadap implementasi yang dihasilkan.
+
+Beberapa penyesuaian yang diterapkan meliputi:
+
+- Mengganti data contoh dengan identitas pribadi, yaitu NPM, nama lengkap, dan kelas PBP.
+- Menyesuaikan ikon, nama, serta warna setiap tombol agar sesuai dengan fungsi masing-masing.
+- Menggunakan atribut `color` pada model `ItemHomepage` sehingga setiap kartu dapat memiliki warna masing-masing tanpa membutuhkan percabangan `if-else` berulang.
+- Menambahkan komentar penjelas pada bagian-bagian penting kode untuk memperjelas fungsi widget dan implementasinya.
+- Memastikan pesan `SnackBar` menyesuaikan nama tombol yang ditekan serta menyembunyikan notifikasi sebelumnya sebelum menampilkan notifikasi baru.
+
+### 5. Fitur dan Penyempurnaan Tambahan
+
+Selain memenuhi checklist tugas, saya menambahkan beberapa penyempurnaan berikut tanpa mengubah struktur proyek dari Tutorial 08:
+
+- **SnackBar berwarna sesuai tombol:** `SnackBar` menggunakan `backgroundColor: item.color`, sehingga warna notifikasi sama dengan warna tombol yang ditekan. Fitur ini memanfaatkan atribut `color` pada model `ItemHomepage` yang sudah ada, tanpa logika tambahan.
+- **SnackBar melayang (floating):** `SnackBar` ditampilkan dengan `behavior: SnackBarBehavior.floating`, sehingga muncul sebagai kartu melayang di atas konten, bukan bar penuh di bagian bawah layar.
+- **Palet warna yang serasi dengan tema:** Warna tombol menggunakan shade Material (`Colors.indigo.shade600`, `Colors.teal.shade600`, `Colors.deepOrange.shade700`). Ketiganya kontras satu sama lain, selaras dengan tema `seedColor: Colors.indigo`, dan tetap terbaca dengan ikon serta teks berwarna putih. Merah-oranye dipakai untuk Logout karena umum digunakan sebagai penanda aksi keluar.
+- **Docstring pada setiap kelas:** Kelas `MyHomePage`, `InfoCard`, `ItemHomepage`, dan `ItemCard` di `menu.dart` diberi docstring Dart (`///`) yang menjelaskan peran masing-masing, termasuk alasan warna disimpan di model.
+- **Komentar kode diperbarui:** Komentar pada `ItemCard` diperbaiki agar sesuai dengan implementasi terbaru (warna diambil dari `item.color`, bukan lagi dari warna sekunder tema).
+
+### 6. Kesimpulan
+
+Penggunaan Claude Opus 5.5 membantu saya memahami implementasi Flutter secara lebih mendalam, khususnya dalam memahami fungsi setiap bagian kode sebelum menerapkannya. Namun, saya menyadari bahwa AI memiliki keterbatasan dalam memahami konteks proyek secara keseluruhan dan tidak selalu dapat menentukan tindakan yang tepat berdasarkan kondisi aplikasi yang sedang berjalan.
