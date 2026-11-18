@@ -1,30 +1,57 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:myportofolio_mobile/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('Tombol Tambah Proyek membuka form dan validasi berjalan', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const MyApp());
+    expect(find.text('Selamat datang di MyPortfolio Mobile!'), findsOneWidget);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Navigasi ke form melalui tombol di halaman utama.
+    await tester.tap(find.text('Tambah Proyek'));
+    await tester.pumpAndSettle();
+    expect(find.text('Add Project Form'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Tutup SnackBar agar tidak menutupi tombol Save di viewport tes.
+    tester
+        .state<ScaffoldMessengerState>(find.byType(ScaffoldMessenger))
+        .removeCurrentSnackBar();
+    await tester.pumpAndSettle();
+
+    // Menekan Save dengan field kosong memunculkan pesan validasi.
+    await tester.tap(find.text('Save'));
     await tester.pump();
+    expect(find.text('Nama proyek tidak boleh kosong!'), findsOneWidget);
+    expect(find.text('Deskripsi proyek tidak boleh kosong!'), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Mengisi field wajib lalu Save memunculkan dialog berisi data.
+    await tester.enterText(find.byType(TextFormField).at(0), 'Burhanpedia');
+    await tester.enterText(find.byType(TextFormField).at(1), 'Ensiklopedia');
+    await tester.tap(find.text('Save'));
+    await tester.pumpAndSettle();
+    expect(find.text('Proyek berhasil ditambahkan!'), findsOneWidget);
+    expect(find.text('Nama Proyek: Burhanpedia'), findsOneWidget);
+  });
+
+  testWidgets('Drawer berisi navigasi Home dan Add Project', (
+    WidgetTester tester,
+  ) async {
+    // Font tes (Ahem) jauh lebih lebar dari Roboto sehingga teks DrawerHeader
+    // meluap di lingkungan tes; perkecil skala teks agar tata letak realistis.
+    tester.platformDispatcher.textScaleFactorTestValue = 0.5;
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+
+    await tester.pumpWidget(const MyApp());
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await tester.pumpAndSettle();
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Add Project'), findsOneWidget);
+
+    await tester.tap(find.text('Add Project'));
+    await tester.pumpAndSettle();
+    expect(find.text('Add Project Form'), findsOneWidget);
   });
 }
