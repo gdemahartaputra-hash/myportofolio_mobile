@@ -83,6 +83,20 @@ Aplikasi mobile Flutter untuk portofolio pribadi saya. Aplikasi ini adalah klien
 
    *Full restart* (hentikan dengan `q` lalu jalankan `flutter run` lagi) diperlukan ketika ada perubahan kode native (Android/iOS), menambah package di `pubspec.yaml` yang punya plugin native, atau mengubah aset dan konfigurasi build.
 
+### Tugas 8
+
+1. **`push()`, `pushReplacement()`, dan `pop()`.**
+   `Navigator` menyimpan halaman (*route*) sebagai tumpukan (*stack*). `push()` menaruh route baru di atas route lama, sehingga halaman sebelumnya masih ada dan bisa dikembalikan. `pushReplacement()` mengganti route paling atas dengan route baru, sehingga route lama dibuang. `pop()` membuang route paling atas sehingga halaman di bawahnya tampil lagi. Kartu **Tambah Edukasi** memakai `Navigator.push()`, jadi stack menjadi `[Home, Form Edukasi]`, dan tombol Back perangkat atau browser menjalankan `pop()` untuk kembali ke menu. Opsi **Home** di drawer memakai `Navigator.pushReplacement()` dengan `MyHomePage` baru, sehingga halaman form di atas stack diganti oleh halaman utama. Kalau form dibuka dari drawer (`[Form]` menjadi `[Home]`), stack tetap berisi satu halaman. Kalau form dibuka dari kartu, stack menjadi `[Home lama, Home baru]`, sehingga menekan Back sekali lagi akan menampilkan Home yang lama.
+
+2. **Konsistensi dengan `Scaffold`, `AppBar`, dan `Drawer`.**
+   Setiap halaman memakai kerangka yang sama: `Scaffold` sebagai wadah, `AppBar` di atas, dan `drawer: const LeftDrawer()`. Karena drawer adalah satu widget yang dipakai ulang di halaman utama, form proyek, dan form edukasi, isi menu dan tampilannya selalu sama, dan perubahan cukup dilakukan di satu berkas. Contoh warna tema: warna indigo dipakai di beberapa halaman. Halaman utama memakai `Theme.of(context).colorScheme.primary`, yang diturunkan dari `seedColor: Colors.indigo` di `main.dart`. `Colors.indigo` sendiri dipakai sebagai latar `DrawerHeader`, `AppBar`, dan tombol Simpan pada form proyek dan form edukasi.
+
+3. **Tata letak formulir.**
+   Form disusun dalam satu `Column` vertikal sehingga input dibaca berurutan dari atas ke bawah, satu field per baris, dengan tombol Simpan di akhir. Setiap input dibungkus `Padding` (`EdgeInsets.all(8.0)`) agar ada jarak yang seragam antar-field dan dari tepi layar. Tombol Simpan dibungkus `Align` agar posisinya di tengah. Seluruh isi form dibungkus `SingleChildScrollView`. Saat keyboard muncul, `Scaffold` memperkecil area body, sehingga tanpa scroll input bagian bawah dan tombol Simpan akan tertutup atau menyebabkan *overflow*. Dengan scroll, semua isian tetap bisa dijangkau di layar sempit.
+
+4. **`GlobalKey<FormState>`, `validator`, dan `validate()`.**
+   `GlobalKey<FormState>` dipasang pada widget `Form` agar tombol Simpan bisa mengakses state form lewat `_formKey.currentState`. Saat Simpan ditekan, `validate()` memanggil `validator` setiap field. Validator yang mengembalikan string akan menampilkan pesan error di bawah kolomnya, dan `validate()` mengembalikan `false`. Dialog ringkasan hanya dibuka jika `validate()` bernilai `true`. Contoh nilai yang ditolak: Tahun Mulai `2024` dengan Tahun Selesai `2020` ditolak dengan pesan "Tahun selesai tidak boleh sebelum tahun mulai!" Keyboard angka (`TextInputType.number`) hanya membantu pengguna mengetik angka. Keyboard itu tidak tahu aturan seperti urutan tahun, rentang tahun yang wajar, atau isian yang hanya berisi spasi. Selain itu, `keyboardType` hanya berupa petunjuk: di web dan desktop pengguna tetap bisa mengetik atau menempelkan teks apa pun. Karena itu validasi tetap harus dilakukan oleh `validator`.
+
 ## AI Disclosure
 
 ### Tugas 7
