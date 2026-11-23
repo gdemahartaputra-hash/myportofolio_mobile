@@ -22,11 +22,17 @@ Aplikasi mobile Flutter untuk portofolio pribadi saya. Aplikasi ini adalah klien
 |---|---|---|
 | Tutorial 08 | Basic Flutter | Inisialisasi proyek, pemisahan `menu.dart`, `MyHomePage` Stateless, `InfoCard` & `ItemCard`, SnackBar |
 | Tugas 7 | Basic Flutter | Identitas pribadi di InfoCard, warna unik tiap tombol lewat atribut `color` pada model `ItemHomepage` |
+| Tutorial 09 | Navigation, Layouts, Forms | `LeftDrawer`, form Tambah Proyek dengan validasi dan dialog, navigasi tombol, refactor ke `screens/` dan `widgets/` |
+| Tugas 8 | Navigation, Layouts, Forms | Form Edukasi sesuai model `Education` dengan validasi (wajib diisi, batas panjang, rentang dan urutan tahun, format URL), kartu aksi dan opsi drawer baru |
 
 ## Struktur Kode
 
 - `lib/main.dart`: entry point (`main()`) dan `MyApp` (MaterialApp + tema).
-- `lib/menu.dart`: halaman utama `MyHomePage`, widget `InfoCard`, model `ItemHomepage`, dan widget `ItemCard`.
+- `lib/screens/menu.dart`: halaman utama `MyHomePage`, widget `InfoCard`, dan model `ItemHomepage`.
+- `lib/screens/project_form.dart`: form Tambah Proyek (Tutorial 09).
+- `lib/screens/education_form.dart`: form Tambah Edukasi (Tugas 8).
+- `lib/widgets/left_drawer.dart`: drawer navigasi (Home, Add Project, Add Education) yang dipakai di semua halaman.
+- `lib/widgets/project_card.dart`: kartu aksi `ItemCard` beserta navigasinya.
 
 ## Pertanyaan Reflektif
 
@@ -79,9 +85,10 @@ Aplikasi mobile Flutter untuk portofolio pribadi saya. Aplikasi ini adalah klien
 
 ## AI Disclosure
 
+### Tugas 7
 Dalam pengerjaan Individual Assignment 7, saya menggunakan **Claude Opus 5.5** sebagai AI assistant untuk membantu memahami struktur, fungsi, dan implementasi kode Flutter. Penggunaan AI difokuskan sebagai sarana pembelajaran agar saya dapat mengimplementasikan setiap instruksi tugas secara mandiri berdasarkan pemahaman terhadap kode yang digunakan.
 
-### 1. Penggunaan AI
+#### 1. Penggunaan AI
 
 Claude Opus 5.5 digunakan untuk beberapa keperluan berikut:
 
@@ -89,7 +96,7 @@ Claude Opus 5.5 digunakan untuk beberapa keperluan berikut:
 - **Membimbing dalam Implementasi:** Memahami cara mengimplementasikan persyaratan Tugas 7, seperti pemisahan kode ke dalam `main.dart` dan `menu.dart`, penggunaan `StatelessWidget`, pembuatan `InfoCard` dan `ItemCard`, serta penerapan warna berbeda pada setiap tombol.
 - **Pemahaman Konsep Dasar:** Memperdalam pemahaman mengenai konsep Flutter, khususnya `MaterialApp`, `BuildContext`, `StatelessWidget`, `StatefulWidget`, hot reload, dan hot restart.
 
-### 2. Log Prompt dan Interaksi AI
+#### 2. Log Prompt dan Interaksi AI
 
 Berikut merupakan ringkasan jenis prompt yang digunakan selama proses pengerjaan:
 
@@ -102,7 +109,7 @@ Berikut merupakan ringkasan jenis prompt yang digunakan selama proses pengerjaan
 | 5 | Interaction | Memahami penggunaan `InkWell`, `ScaffoldMessenger`, dan `SnackBar` untuk memberikan respons ketika tombol ditekan. |
 | 6 | Debugging | Meminta penjelasan mengenai perbedaan hot reload dan hot restart serta penyebab perubahan struktur kelas tidak dapat diterapkan melalui hot reload. |
 
-### 3. Evaluasi Keterbatasan AI
+#### 3. Evaluasi Keterbatasan AI
 
 Selama pengerjaan, saya menemukan bahwa AI tidak selalu benar dan tidak selalu sesuai dengan batasan tugas. Berikut kesalahan dan keterbatasan nyata yang saya temui, beserta cara saya menanganinya:
 
@@ -120,7 +127,7 @@ Selama pengerjaan, saya menemukan bahwa AI tidak selalu benar dan tidak selalu s
 
 Secara keseluruhan, AI paling berguna untuk menjelaskan konsep dan memberi arah. Namun, keputusan tentang apa yang benar-benar diminta tugas, seberapa jauh perubahan boleh dilakukan, dan apakah aplikasi sudah berjalan dengan benar tetap harus saya verifikasi sendiri.
 
-### 4. Verifikasi dan Perbaikan Mandiri
+#### 4. Verifikasi dan Perbaikan Mandiri
 
 Untuk memastikan hasil pengerjaan sesuai dengan kebutuhan tugas, saya melakukan penyesuaian dan pemeriksaan terhadap implementasi yang dihasilkan.
 
@@ -132,7 +139,7 @@ Beberapa penyesuaian yang diterapkan meliputi:
 - Menambahkan komentar penjelas pada bagian-bagian penting kode untuk memperjelas fungsi widget dan implementasinya.
 - Memastikan pesan `SnackBar` menyesuaikan nama tombol yang ditekan serta menyembunyikan notifikasi sebelumnya sebelum menampilkan notifikasi baru.
 
-### 5. Fitur dan Penyempurnaan Tambahan
+#### 5. Fitur dan Penyempurnaan Tambahan
 
 Selain memenuhi checklist tugas, saya menambahkan beberapa penyempurnaan berikut tanpa mengubah struktur proyek dari Tutorial 08:
 
@@ -142,6 +149,87 @@ Selain memenuhi checklist tugas, saya menambahkan beberapa penyempurnaan berikut
 - **Docstring pada setiap kelas:** Kelas `MyHomePage`, `InfoCard`, `ItemHomepage`, dan `ItemCard` di `menu.dart` diberi docstring Dart (`///`) yang menjelaskan peran masing-masing, termasuk alasan warna disimpan di model.
 - **Komentar kode diperbarui:** Komentar pada `ItemCard` diperbaiki agar sesuai dengan implementasi terbaru (warna diambil dari `item.color`, bukan lagi dari warna sekunder tema).
 
-### 6. Kesimpulan
+#### 6. Kesimpulan
 
 Penggunaan Claude Opus 5.5 membantu saya memahami implementasi Flutter secara lebih mendalam, khususnya dalam memahami fungsi setiap bagian kode sebelum menerapkannya. Namun, saya menyadari bahwa AI memiliki keterbatasan dalam memahami konteks proyek secara keseluruhan dan tidak selalu dapat menentukan tindakan yang tepat berdasarkan kondisi aplikasi yang sedang berjalan.
+
+### Tugas 8
+
+Dalam pengerjaan Individual Assignment 8, saya menggunakan **Claude Opus 5.5** sebagai AI assistant untuk membantu memahami, merancang, dan memeriksa implementasi navigasi, layout, serta formulir pada aplikasi Flutter. Penggunaan AI dilakukan dengan pendekatan *AI-assisted development*, yaitu menjadikan AI sebagai pendamping pembelajaran dan pemberi arahan teknis, sementara keputusan implementasi, penyesuaian kode, dan verifikasi hasil tetap saya lakukan secara mandiri.
+
+#### 1. Penggunaan AI
+
+Claude Opus 5.5 digunakan sebagai pendamping selama proses pengerjaan Tugas 8, khususnya dalam beberapa aspek berikut:
+
+- **Analisis Persyaratan Tugas:** Meminta Claude membantu menguraikan checklist Tugas 8 menjadi langkah-langkah implementasi yang lebih terstruktur, serta mengidentifikasi hubungan antara materi Tutorial 09 dengan pengembangan aplikasi yang sudah dibuat pada Tugas 7.
+- **Implementasi Formulir:** Memahami cara membuat halaman `EducationFormPage` menggunakan `StatefulWidget`, `Form`, dan `GlobalKey<FormState>`. AI juga membantu menjelaskan penggunaan berbagai widget input, seperti `TextFormField` dan `DropdownButtonFormField`.
+- **Validasi Input:** Memahami cara menerapkan validator untuk setiap field berdasarkan karakteristik data pendidikan, seperti kewajiban pengisian, batas maksimal karakter, validasi tahun, urutan tahun mulai dan selesai, serta format URL thumbnail.
+- **Implementasi Navigasi:** Memahami perbedaan penggunaan `Navigator.push()` dan `Navigator.pushReplacement()` dalam menghubungkan halaman utama, formulir, dan drawer.
+- **Integrasi Komponen:** Meminta bantuan untuk memahami cara menghubungkan halaman formulir baru dengan `ItemCard` dan `LeftDrawer` tanpa menghilangkan fungsionalitas yang sudah dibuat pada Tugas 7 dan Tutorial 09.
+- **Debugging dan Code Review:** Meminta Claude memeriksa struktur kode, konsistensi implementasi, kemungkinan kesalahan validasi, serta kesesuaian hasil pengerjaan dengan instruksi dan rubrik penilaian.
+
+#### 2. Log Prompt dan Interaksi AI
+
+Berikut merupakan ringkasan jenis prompt yang digunakan selama proses pengerjaan Tugas 8. Ringkasan ini menggambarkan fokus interaksi dengan Claude Opus 5.5, bukan transkrip verbatim seluruh percakapan.
+
+| No. | Fokus | Tujuan Prompt |
+|---|---|---|
+| 1 | Task Analysis | Meminta Claude menganalisis instruksi Tugas 8 dan mengidentifikasi bagian-bagian yang perlu ditambahkan pada proyek Flutter dari Tugas 7. |
+| 2 | Form Structure | Meminta penjelasan mengenai struktur `StatefulWidget`, `Form`, `GlobalKey<FormState>`, dan cara mengimplementasikannya pada halaman formulir edukasi. |
+| 3 | Input Elements | Memahami pemilihan widget input yang sesuai untuk setiap atribut pendidikan, termasuk penggunaan `TextFormField` dan `DropdownButtonFormField`. |
+| 4 | Input Validation | Meminta penjelasan dan arahan implementasi validator untuk input wajib, batas karakter, tahun mulai, tahun selesai, serta URL thumbnail. |
+| 5 | Navigation | Memahami penggunaan `Navigator.push()` untuk membuka formulir melalui kartu aksi dan `Navigator.pushReplacement()` untuk navigasi melalui drawer. |
+| 6 | Widget Integration | Meminta bantuan mengintegrasikan halaman `EducationFormPage` dengan `ItemCard` dan `LeftDrawer`, sekaligus mempertahankan fitur dari tugas sebelumnya. |
+| 7 | Dialog Implementation | Memahami cara menggunakan `FormState.validate()`, `showDialog()`, dan `AlertDialog` untuk menampilkan ringkasan isian setelah validasi berhasil. |
+| 8 | Code Review | Meminta Claude memeriksa implementasi akhir berdasarkan checklist tugas, keterbacaan kode, dan kemungkinan kesalahan pada alur navigasi maupun validasi. |
+
+#### 3. Evaluasi Keterbatasan AI
+
+Selama menggunakan Claude Opus 5.5, saya menyadari bahwa AI dapat memberikan arahan teknis yang membantu, tetapi hasilnya tetap membutuhkan pemahaman konteks dan pemeriksaan secara mandiri. Beberapa keterbatasan yang perlu diperhatikan dalam pengerjaan ini adalah:
+
+- **Pemilihan jenis input tidak menjamin validitas data.** Penggunaan `keyboardType: TextInputType.number` pada field tahun memang membantu menampilkan papan ketik numerik. Namun, hal tersebut tidak menjamin bahwa pengguna hanya memasukkan angka. Oleh karena itu, saya tetap menerapkan `int.tryParse()` di dalam validator untuk memastikan input benar-benar dapat dikonversi menjadi integer. Hal ini menunjukkan bahwa saran penggunaan widget input saja belum cukup untuk menjamin validitas data.
+
+- **Validasi harus mempertimbangkan hubungan antar-field.** Validasi setiap kolom secara terpisah tidak cukup untuk memastikan data pendidikan konsisten. Sebagai contoh, tahun selesai tidak boleh lebih awal daripada tahun mulai. Karena itu, validator pada field tahun selesai juga perlu membaca nilai `_startedYear` agar dapat memeriksa hubungan kedua input tersebut.
+
+- **AI perlu memahami karakteristik model data.** Field Nilai/IPK tidak selalu berbentuk angka karena pengguna dapat memasukkan nilai berupa angka seperti `3.85` maupun huruf seperti `A`. Oleh sebab itu, penggunaan validasi numerik secara langsung justru dapat menolak data yang sebenarnya diperbolehkan. Saya mempertahankan input berbentuk teks dengan batas maksimal 100 karakter agar lebih sesuai dengan variasi nilai yang dapat digunakan.
+
+- **Perbedaan kebutuhan navigasi.** `Navigator.push()` dan `Navigator.pushReplacement()` sama-sama dapat membuka halaman baru, tetapi memiliki dampak berbeda terhadap navigation stack. Penggunaan keduanya tidak boleh disamakan. Pada implementasi ini, `Navigator.push()` digunakan pada kartu aksi agar pengguna dapat kembali menggunakan tombol Back, sedangkan `Navigator.pushReplacement()` digunakan pada drawer agar halaman sebelumnya digantikan ketika berpindah menu.
+
+- **Pemeriksaan kode tidak sama dengan pengujian fungsional.** AI dapat membantu memeriksa struktur dan kemungkinan kesalahan pada kode, tetapi tidak dapat menjadikan analisis kode sebagai bukti bahwa seluruh interaksi aplikasi sudah berjalan sesuai harapan. Navigasi dari kartu dan drawer, validasi input tidak valid, serta tampilan dialog setelah input valid tetap perlu diuji secara langsung.
+
+Dari keterbatasan tersebut, saya memahami bahwa AI sebaiknya digunakan untuk membantu mempercepat proses pemahaman dan implementasi, bukan sebagai satu-satunya sumber kebenaran. Setiap saran tetap harus disesuaikan dengan model data, instruksi tugas, dan perilaku aplikasi yang sebenarnya.
+
+#### 4. Verifikasi dan Perbaikan Mandiri
+
+Setelah memperoleh arahan dari Claude Opus 5.5, saya melakukan penyesuaian terhadap implementasi agar sesuai dengan kebutuhan aplikasi dan karakteristik data pendidikan.
+
+Beberapa implementasi dan penyesuaian yang dilakukan meliputi:
+
+- Membuat halaman `EducationFormPage` dalam file Dart tersendiri pada direktori `lib/screens/`, menggunakan `StatefulWidget` dan `GlobalKey<FormState>`.
+- Menyesuaikan field formulir dengan atribut model `Education`, yaitu nama institusi, jurusan, nilai/IPK, jenjang pendidikan, tahun mulai, tahun selesai, dan thumbnail.
+- Menerapkan validasi `trim().isEmpty` agar input yang hanya berisi spasi tetap dianggap tidak valid.
+- Menambahkan batas maksimal 255 karakter untuk nama institusi dan jurusan, serta 100 karakter untuk nilai/IPK.
+- Memastikan tahun mulai berada dalam rentang 1950 hingga tahun saat ini, serta tahun selesai tidak lebih awal daripada tahun mulai.
+- Membuat field tahun selesai dan thumbnail bersifat opsional sesuai karakteristik datanya.
+- Memvalidasi URL thumbnail agar hanya menerima alamat dengan skema HTTP atau HTTPS dan host yang valid.
+- Mengintegrasikan halaman edukasi ke dalam `ItemCard` dan `LeftDrawer` tanpa menghilangkan menu Home dan Add Project.
+- Memastikan ringkasan data hanya ditampilkan melalui `AlertDialog` setelah seluruh input berhasil melewati validasi.
+
+Saya juga mempertahankan struktur proyek dari tugas sebelumnya dengan memisahkan halaman ke dalam direktori `screens/` dan komponen yang digunakan kembali ke dalam direktori `widgets/`.
+
+#### 5. Fitur dan Penyempurnaan Tambahan
+
+Selain implementasi utama yang diminta dalam checklist, terdapat beberapa penyempurnaan pada formulir dan navigasi aplikasi:
+
+- **Validasi rentang tahun dinamis:** Batas maksimal tahun mulai menggunakan `DateTime.now().year`, sehingga batas validasi mengikuti tahun saat aplikasi dijalankan dan tidak perlu diperbarui secara manual.
+- **Field opsional yang kontekstual:** Tahun selesai dapat dikosongkan untuk menunjukkan bahwa pendidikan masih berlangsung. Pada dialog ringkasan, kondisi tersebut ditampilkan sebagai "Sekarang".
+- **Validasi URL thumbnail:** Pengguna dapat menambahkan gambar thumbnail melalui URL. Sistem memeriksa skema HTTP/HTTPS, keberadaan host, dan batas maksimal panjang URL sebelum menerima input.
+- **Pilihan jenjang pendidikan:** Menggunakan `DropdownButtonFormField` dengan beberapa pilihan, yaitu Master's Degree, Bachelor's Degree, Senior High School, Junior High School, dan Elementary School.
+- **Navigasi drawer yang terintegrasi:** Opsi Add Education ditambahkan ke drawer yang sama dengan halaman utama dan formulir proyek, sehingga pengguna memperoleh pengalaman navigasi yang konsisten.
+- **Layout formulir yang dapat digulir:** Penggunaan `SingleChildScrollView` memungkinkan seluruh field dan tombol Simpan tetap dapat dijangkau ketika konten lebih panjang daripada ruang layar yang tersedia.
+
+#### 6. Kesimpulan
+
+Penggunaan Claude Opus 5.5 dalam pengerjaan Tugas 8 membantu saya memahami penerapan navigasi, pengelolaan formulir, validasi input, dan integrasi antar-widget dalam Flutter. Saya belajar bahwa pembuatan formulir bukan hanya tentang menampilkan kolom input, tetapi juga memastikan bahwa data yang diterima memenuhi aturan dan memiliki hubungan yang konsisten satu sama lain.
+
+Melalui proses ini, saya semakin memahami pentingnya memeriksa setiap saran AI berdasarkan kebutuhan aplikasi dan instruksi tugas. AI membantu memberikan arahan serta mempercepat proses pembelajaran, tetapi tanggung jawab untuk menentukan implementasi yang tepat, melakukan penyesuaian, dan memastikan aplikasi berjalan dengan baik tetap berada pada saya.
