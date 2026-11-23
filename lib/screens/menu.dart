@@ -36,10 +36,11 @@ class MyHomePage extends StatelessWidget {
       ),
       // Drawer menu untuk navigasi antarhalaman.
       drawer: const LeftDrawer(),
-      // Body halaman utama dengan padding di sekelilingnya.
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+      // SingleChildScrollView agar halaman bisa digulir jika kartu tidak muat.
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
@@ -71,7 +72,10 @@ class MyHomePage extends StatelessWidget {
 
                   // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
                   GridView.count(
-                    primary: true,
+                    // Scroll ditangani SingleChildScrollView di luar, jadi grid
+                    // tidak perlu men-scroll sendiri.
+                    primary: false,
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(20),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
@@ -87,6 +91,7 @@ class MyHomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }
